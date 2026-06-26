@@ -1,16 +1,17 @@
-#Server
+# Server
 server:
-  port: 8090
+  port: ${SERVER_PORT:8090}
 
 spring:
   application:
     name: FoopApp
-  ## mail config
+
+  # Mail config
   mail:
     host: smtp.gmail.com
     port: 587
-    username: williamstambunan@gmail.com
-    password: orkp lfkc isbo lisb
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
@@ -19,11 +20,11 @@ spring:
             enable: true
             required: true
 
-  ## mysql config
+  # MySQL config
   datasource:
-    url: jdbc:mysql://localhost:3306/food_app
-    username: root
-    password:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/food_app}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -33,45 +34,28 @@ spring:
     hibernate:
       ddl-auto: update
 
+secretJwtToken: ${JWT_SECRET:change-this-dev-secret}
 
-#  datasource:
-#    url: postgresql://localhost:5432/your_database_name
-#    username: root
-#    password: admin12345
-#    driver-class-name: org.postgresql.Driver
-#
-#  jpa:
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#    hibernate:
-#      ddl-auto: update
-
-secretJwtToken: abc123456789app987654321abc123456789app987654321
-
-###LOCAL
 base:
   payment:
-    link: http://localhost:3000/pay?orderid=
+    link: ${BASE_PAYMENT_LINK:http://localhost:3000/pay?orderid=}
 
 frontend:
   base:
-    url: http://localhost:3000
+    url: ${FRONTEND_BASE_URL:http://localhost:3000}
 
-
-##Stripe Config
+# Stripe Config
 stripe:
   api:
     public:
-      key: pk_test_51TlmF9FS3I58tLkCIhMyZWWZqcytDv1xpYSV88LmjWP2g8dwamTxPVk4euPJBQCahZNrML4GUWVlmLNG6l63tAgF00TeH2Jx40
+      key: ${STRIPE_PUBLIC_KEY:}
     secret:
-      key: sk_test_51TlmF9FS3I58tLkCq31RnReyWHyhoKvHDEUs22tDJHV4MP5xRFNBjIhIkLKFCtLBXfDZf3ScjOLhQZgCbHJYFUkX00MY3KdewB
+      key: ${STRIPE_SECRET_KEY:}
 
-
-## AWS Config
+# AWS Config
 aws:
   s3:
-    region: us-east-1
-    bucket: foop-app-dev
-  accessKeyId: AKIAUBO6W7AXD4QTP67T
-  secretKey: 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
+    region: ${AWS_REGION:us-east-1}
+    bucket: ${AWS_S3_BUCKET:foop-app-dev}
+  accessKeyId: ${AWS_ACCESS_KEY_ID:}
+  secretKey: ${AWS_SECRET_ACCESS_KEY:}

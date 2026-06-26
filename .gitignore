@@ -31,3 +31,27 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### Secrets / Environment ###
+.env
+.env.*
+*.env
+
+### Local Spring config with secrets ###
+src/main/resources/application-local.yaml
+src/main/resources/application-local.yml
+src/main/resources/application-dev.yaml
+src/main/resources/application-dev.yml
+src/main/resources/application-secret.yaml
+src/main/resources/application-secret.yml
+
+### Logs ###
+*.log
+logs/
+
+### Docker local override ###
+docker-compose.override.yml
+
+### AWS local credentials ###
+.aws/
