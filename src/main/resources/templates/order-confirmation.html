@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pesanan</title>
+
+    <style>
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f3f4f6 !important;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .email-wrapper {
+            width: 100%;
+            padding: 32px 12px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 620px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+        }
+
+        .top-bar {
+            background: linear-gradient(135deg, #ff6600, #f97316);
+            padding: 34px 28px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .status-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.18);
+            border: 2px solid rgba(255, 255, 255, 0.45);
+            color: #ffffff;
+            font-size: 36px;
+            line-height: 72px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            line-height: 1.3;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            margin: 10px 0 0;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 15px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        p {
+            margin: 0 0 14px;
+        }
+
+        .greeting {
+            font-weight: 700;
+            font-size: 17px;
+            color: #111827;
+        }
+
+        .intro {
+            color: #4b5563;
+        }
+
+        .notice-box {
+            background-color: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+
+        .order-details {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 18px;
+            margin: 24px 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 14px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 9px 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+        }
+
+        .detail-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #6b7280;
+        }
+
+        .detail-value {
+            color: #111827;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .order-items {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px dashed #d1d5db;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .total-box {
+            margin-top: 18px;
+            padding: 16px;
+            background-color: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            text-align: right;
+        }
+
+        .total-label {
+            display: block;
+            color: #9a3412;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .total {
+            font-weight: 800;
+            font-size: 22px;
+            color: #ff6600;
+        }
+
+        .button-wrapper {
+            text-align: center;
+            margin: 28px 0 14px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #ff6600, #ea580c);
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 700;
+            box-shadow: 0 8px 18px rgba(249, 115, 22, 0.25);
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+        }
+
+        .payment-note {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .footer {
+            background-color: #f9fafb;
+            padding: 22px 30px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .footer p {
+            margin-bottom: 8px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-wrapper {
+                padding: 18px 10px;
+            }
+
+            .content {
+                padding: 24px 20px;
+            }
+
+            .top-bar {
+                padding: 30px 20px;
+            }
+
+            .status-icon {
+                width: 64px;
+                height: 64px;
+                line-height: 64px;
+                font-size: 32px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .detail-row {
+                display: block;
+            }
+
+            .detail-value {
+                display: block;
+                text-align: left;
+                margin-top: 4px;
+            }
+
+            .order-item {
+                display: block;
+            }
+
+            .total-box {
+                text-align: left;
+            }
+
+            .button {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="email-wrapper">
+    <div class="container">
+
+        <div class="top-bar">
+            <div class="status-icon">🛒</div>
+            <h1>Konfirmasi Pesanan</h1>
+            <p class="subtitle">Pesanan Anda telah kami terima</p>
+        </div>
+
+        <div class="content">
+            <p class="greeting">
+                Halo <span th:text="${customerName}">Pelanggan</span>,
+            </p>
+
+            <p class="intro">
+                Terima kasih sudah melakukan pemesanan. Pesanan Anda telah kami terima dan saat ini sedang menunggu proses pembayaran.
+            </p>
+
+            <div class="notice-box">
+                Silakan selesaikan pembayaran agar pesanan Anda dapat segera kami proses.
+            </div>
+
+            <div class="order-details">
+                <div class="section-title">Detail Pesanan</div>
+
+                <div class="detail-row">
+                    <span class="detail-label">ID Pesanan</span>
+                    <span class="detail-value" th:text="${orderId}"></span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Tanggal Pesanan</span>
+                    <span class="detail-value" th:text="${orderDate}"></span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Alamat Pengiriman</span>
+                    <span class="detail-value" th:text="${deliveryAddress}"></span>
+                </div>
+
+                <div class="detail-row">
+                    <span class="detail-label">Total Item</span>
+                    <span class="detail-value" th:text="${totalItems}"></span>
+                </div>
+
+                <div class="order-items" th:utext="${orderItemsHtml}">
+                    <!-- Daftar item pesanan akan ditampilkan di sini -->
+                </div>
+
+                <div class="total-box">
+                    <span class="total-label">Total Pembayaran</span>
+                    <span class="total" th:text="${totalAmount}">Rp</span>
+                </div>
+            </div>
+
+            <div class="button-wrapper">
+                <a class="button" th:href="${paymentLink}">
+                    Selesaikan Pembayaran
+                </a>
+            </div>
+
+            <p class="payment-note">
+                Klik tombol di atas untuk menyelesaikan pembayaran secara aman.
+                Setelah pembayaran berhasil, pesanan Anda akan segera kami proses.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>
+                Jika ada pertanyaan mengenai pesanan ini, silakan hubungi kami melalui email
+                <strong>support@example.com</strong>.
+            </p>
+
+            <p>
+                &copy; <span th:text="${currentYear}">2026</span> Your Phegon Food. Semua hak dilindungi.
+            </p>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
